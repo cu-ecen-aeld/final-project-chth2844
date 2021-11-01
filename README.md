@@ -1,5 +1,5 @@
 # Temperature-Check & Secure Attendance System 
-final-project-chth2844 created by GitHub Classroom
+This reposistory contains Source code for the final project 
 
 # Repository Overview 
 [Project Overview](https://github.com/cu-ecen-aeld/final-project-chth2844/wiki/Project-Overview)\
