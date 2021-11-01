@@ -1,4 +1,4 @@
-# AESD-Final Project Repository
+# Temperature-Check & Secure Attendance System 
 final-project-chth2844 created by GitHub Classroom
 
 # Repository Overview 
