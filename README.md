@@ -2,5 +2,5 @@
 final-project-chth2844 created by GitHub Classroom
 
 # Reposistory Overview 
-[Project Overview](https://link-url-here.org)\
-[Project Schedule](https://link-url-here.org)
+[Project Overview](https://github.com/cu-ecen-aeld/final-project-chth2844/wiki/Project-Overview)\
+[Project Schedule](https://github.com/cu-ecen-aeld/final-project-chth2844/wiki/Project-Schedule)
