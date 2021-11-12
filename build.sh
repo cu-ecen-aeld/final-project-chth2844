@@ -9,15 +9,10 @@ git submodule update
 # local.conf won't exist until this step on first execution
 source poky/oe-init-build-env
 
-Create image of the type rpi-sdimg
 IMAGE="IMAGE_FSTYPES = \"wic.bz2\""
 #Set GPU memory as minimum
 MEMORY="GPU_MEM = \"16\""
 
-#########################################################################
-# Check if the support is present in local.conf file
-#########################################################################
-# Add target specification
 CONFLINE="MACHINE = \"raspberrypi4\""
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
@@ -37,9 +32,6 @@ IMAGE_F="IMAGE_FEATURES += \"ssh-server-openssh\""
 cat conf/local.conf | grep "${IMAGE_F}" > /dev/null
 local_imgf_info=$?
 
-##########################################################################
-# Add if the support is missing in the local.conf file
-##########################################################################
 if [ $local_conf_info -ne 0 ];then
 	echo "Append ${CONFLINE} in the local.conf file"
 	echo ${CONFLINE} >> conf/local.conf
@@ -73,11 +65,13 @@ else
         echo "${IMAGE_F} already exists in the local.conf file"
 fi
 
+
 cat conf/local.conf | grep "${IMAGE}" > /dev/null
 local_image_info=$?
 
 cat conf/local.conf | grep "${MEMORY}" > /dev/null
 local_memory_info=$?
+
 
 if [ $local_image_info -ne 0 ];then 
     echo "Append ${IMAGE} in the local.conf file"
@@ -93,10 +87,7 @@ else
 	echo "${MEMORY} already exists in the local.conf file"
 fi
 
-###########################################################################
-# Baking the layers as per update in the local.conf file based upon if the
-# meta-layers are present or not already
-###########################################################################
+
 bitbake-layers show-layers | grep "meta-oe" > /dev/null
 layer_info=$?
 
@@ -146,6 +137,6 @@ if [ $layer_info -ne 0 ];then
 else
         echo "meta-aesd layer already exists"
 fi
-############################################################################
+
 set -e
 bitbake core-image-base
