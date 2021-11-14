@@ -138,5 +138,17 @@ else
         echo "meta-aesd layer already exists"
 fi
 
+bitbake-layers show-layers | grep "meta-uart" > /dev/null
+layer_info=$?
+
+if [ $layer_info -ne 0 ];then
+	echo "Adding meta-uartlayer"
+	bitbake-layers add-layer ../meta-uart
+else
+	echo "meta-uartlayer already exists"
+fi
+
+
+
 set -e
 bitbake core-image-base
