@@ -17,6 +17,12 @@ CONFLINE="MACHINE = \"raspberrypi4\""
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
 
+#Add any packages needed 
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"uart\""
+cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
+local_pack_info=$?
+
+
 # Add Wifi support
 DISTRO_F="DISTRO_FEATURES:append = \"wifi\""
 cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
@@ -38,6 +44,13 @@ if [ $local_conf_info -ne 0 ];then
 	
 else
 	echo "${CONFLINE} already exists in the local.conf file"
+fi
+
+if [ $local_pack_info -ne 0 ];then
+    echo "Append ${ADD_PACK} in the local.conf file"
+	echo ${ADD_PACK} >> conf/local.conf
+else
+	echo "${ADD_PACK} already exists in the local.conf file"
 fi
 
 
