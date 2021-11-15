@@ -14,9 +14,9 @@ ifeq ($(LDFLAGS),)
 	LDFLAGS = -pthread -lrt
 endif
 
-all: gpio
+all: uart
 
-gpio: gpio.c
+gpio: uart.c
 	$(CC) $(CFLAGS) -o uart uart.c $(LDFLAGS)
 
 
