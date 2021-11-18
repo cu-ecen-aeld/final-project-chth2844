@@ -14,14 +14,14 @@ ifeq ($(LDFLAGS),)
 	LDFLAGS = -pthread -lrt
 endif
 
-all: uart
+all: fps
 
-gpio: uart.c
-	$(CC) $(CFLAGS) -o uart uart.c $(LDFLAGS)
+gpio: fps.c
+	$(CC) $(CFLAGS) -o fps fps.c $(LDFLAGS)
 
 
 .PHONY: all
 
 clean:
-	\rm uart
+	\rm fps
 	$(RM) $(TARGET)

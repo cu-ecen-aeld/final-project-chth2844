@@ -18,9 +18,15 @@ cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
 
 #Add any packages needed 
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"uart\""
+#ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"uart\""
+#cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
+#local_pack_info=$?
+
+#Add any packages needed 
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps\""
 cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
 local_pack_info=$?
+
 
 
 # Add Wifi support
@@ -151,15 +157,26 @@ else
         echo "meta-aesd layer already exists"
 fi
 
-bitbake-layers show-layers | grep "meta-uart" > /dev/null
+#bitbake-layers show-layers | grep "meta-uart" > /dev/null
+#layer_info=$?
+
+#if [ $layer_info -ne 0 ];then
+	#echo "Adding meta-uartlayer"
+	#bitbake-layers add-layer ../meta-uart
+#else
+	#echo "meta-uartlayer already exists"
+#fi
+
+bitbake-layers show-layers | grep "meta-fps" > /dev/null
 layer_info=$?
 
 if [ $layer_info -ne 0 ];then
-	echo "Adding meta-uartlayer"
-	bitbake-layers add-layer ../meta-uart
+	echo "Adding meta-fpslayer"
+	bitbake-layers add-layer ../meta-fps
 else
-	echo "meta-uartlayer already exists"
+	echo "meta-fpslayer already exists"
 fi
+
 
 
 
