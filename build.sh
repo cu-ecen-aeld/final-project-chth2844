@@ -10,8 +10,13 @@ git submodule update
 source poky/oe-init-build-env
 
 IMAGE="IMAGE_FSTYPES = \"wic.bz2\""
+cat conf/local.conf | grep "${IMAGE}" > /dev/null
+local_image_info=$?
+
 #Set GPU memory as minimum
 MEMORY="GPU_MEM = \"16\""
+cat conf/local.conf | grep "${MEMORY}" > /dev/null
+local_memory_info=$?
 
 CONFLINE="MACHINE = \"raspberrypi4\""
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
@@ -23,11 +28,9 @@ local_conf_info=$?
 #local_pack_info=$?
 
 #Add any packages needed 
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps\""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps temperature\""
 cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
 local_pack_info=$?
-
-
 
 # Add Wifi support
 DISTRO_F="DISTRO_FEATURES:append = \"wifi\""
@@ -43,6 +46,16 @@ local_imgadd_info=$?
 IMAGE_F="IMAGE_FEATURES += \"ssh-server-openssh\""
 cat conf/local.conf | grep "${IMAGE_F}" > /dev/null
 local_imgf_info=$?
+
+# Add I2C 
+MODULE_I2C="ENABLE_I2C = \"1\""
+cat conf/local.conf | grep "${MODULE_I2C}" > /dev/null
+local_i2c_info=$?
+
+# Autoload I2C_MODULE
+AUTOLOAD_I2C="KERNEL_MODULE_AUTOLOAD:rpi += \"i2c-dev i2c-bcm2708\""
+cat conf/local.conf | grep "${AUTOLOAD_I2C}" > /dev/null
+local_i2c_autoload_info=$?
 
 if [ $local_conf_info -ne 0 ];then
 	echo "Append ${CONFLINE} in the local.conf file"
@@ -85,13 +98,6 @@ else
 fi
 
 
-cat conf/local.conf | grep "${IMAGE}" > /dev/null
-local_image_info=$?
-
-cat conf/local.conf | grep "${MEMORY}" > /dev/null
-local_memory_info=$?
-
-
 if [ $local_image_info -ne 0 ];then 
     echo "Append ${IMAGE} in the local.conf file"
 	echo ${IMAGE} >> conf/local.conf
@@ -104,6 +110,20 @@ if [ $local_memory_info -ne 0 ];then
 	echo ${MEMORY} >> conf/local.conf
 else
 	echo "${MEMORY} already exists in the local.conf file"
+fi
+
+if [ $local_i2c_info -ne 0 ];then
+        echo "Append ${MODULE_I2C} in the local.conf file"
+        echo ${MODULE_I2C} >> conf/local.conf
+else
+        echo "${MODULE_I2C} already exists in the local.conf file"
+fi
+
+if [ $local_i2c_autoload_info -ne 0 ];then
+        echo "Append ${AUTOLOAD_I2C} in the local.conf file"
+        echo ${AUTOLOAD_I2C} >> conf/local.conf
+else
+        echo "${AUTOLOAD_I2C} already exists in the local.conf file"
 fi
 
 
@@ -175,6 +195,16 @@ if [ $layer_info -ne 0 ];then
 	bitbake-layers add-layer ../meta-fps
 else
 	echo "meta-fpslayer already exists"
+fi
+
+bitbake-layers show-layers | grep "meta-temperature" > /dev/null
+layer_info=$?
+
+if [ $layer_info -ne 0 ];then
+        echo "Adding meta-temperature layer"
+        bitbake-layers add-layer ../meta-temperature
+else
+        echo "meta-temperature layer already exists"
 fi
 
 
