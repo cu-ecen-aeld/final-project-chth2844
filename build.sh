@@ -18,7 +18,7 @@ MEMORY="GPU_MEM = \"16\""
 cat conf/local.conf | grep "${MEMORY}" > /dev/null
 local_memory_info=$?
 
-CONFLINE="MACHINE = \"raspberrypi4\""
+CONFLINE="MACHINE = \"raspberrypi3\""
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
 

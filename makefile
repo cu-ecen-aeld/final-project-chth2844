@@ -28,5 +28,5 @@ server: server.c
 
 clean:
 	\rm fps
-        \rm server
+	\rm server
 	$(RM) $(TARGET)
