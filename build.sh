@@ -28,7 +28,7 @@ local_conf_info=$?
 #local_pack_info=$?
 
 #Add any packages needed 
-ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps temperature\""
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps temperature server\""
 cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
 local_pack_info=$?
 
@@ -207,8 +207,15 @@ else
         echo "meta-temperature layer already exists"
 fi
 
+bitbake-layers show-layers | grep "meta-server" > /dev/null
+layer_info=$?
 
-
+if [ $layer_info -ne 0 ];then
+	echo "Adding meta-serverlayer"
+	bitbake-layers add-layer ../meta-server
+else
+	echo "meta-server already exists"
+fi
 
 set -e
 bitbake core-image-base

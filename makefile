@@ -14,14 +14,19 @@ ifeq ($(LDFLAGS),)
 	LDFLAGS = -pthread -lrt
 endif
 
-all: fps
+all: fps server
 
-gpio: fps.c
+default : all 
+
+fps: fps.c 
 	$(CC) $(CFLAGS) -o fps fps.c $(LDFLAGS)
 
+server: server.c 
+	$(CC) $(CFLAGS) -o server server.c $(LDFLAGS)
 
 .PHONY: all
 
 clean:
 	\rm fps
+        \rm server
 	$(RM) $(TARGET)
