@@ -2,6 +2,10 @@
  * File: fps.c
  *****************************************************************************/
 
+//References
+//https://github.com/cu-ecen-aeld/final-project-adityavarshney100/blob/master/Test_code/FP_test_code/fp_test.c
+//https://github.com/sparkfun/Fingerprint_Scanner-TTL
+
 // Include files
 
 #include <unistd.h>
@@ -268,10 +272,8 @@ int get_fingerprint_count()
 void fingerprint()
 {
 	int function=0;
-	printf("\n\n***********************************************************\n");
-	printf("1. Identify a fingerprint\n");
-	printf("2. Get fingerprint count\n");
-	printf("3. Blink LED - hardware testing\n");
+	printf("\n\n************** Fingerprint Sensor User Space Test Code ************************\n");
+	printf("1. Press 1 to ID a fingerprint\n");
 	printf("Enter number: ");
 	scanf("%d", &function);
 	printf("%d\n\n",function);
@@ -402,7 +404,7 @@ int main(int argc, char **argv)
   	while(1)
   	{
 		fingerprint();
-		//socket_conn();
+		
 	}
 // close device
   io_close(hDevice);
