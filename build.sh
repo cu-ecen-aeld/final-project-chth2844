@@ -18,14 +18,14 @@ MEMORY="GPU_MEM = \"16\""
 cat conf/local.conf | grep "${MEMORY}" > /dev/null
 local_memory_info=$?
 
-CONFLINE="MACHINE = \"raspberrypi4\""
+CONFLINE="MACHINE = \"raspberrypi3\""
 cat conf/local.conf | grep "${CONFLINE}" > /dev/null
 local_conf_info=$?
 
 #Add any packages needed 
-#ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"uart\""
-#cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
-#local_pack_info=$?
+ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"uart\""
+cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
+local_pack_info=$?
 
 #Add any packages needed 
 ADD_PACK="CORE_IMAGE_EXTRA_INSTALL += \"fps temperature server\""
@@ -177,15 +177,15 @@ else
         echo "meta-aesd layer already exists"
 fi
 
-#bitbake-layers show-layers | grep "meta-uart" > /dev/null
-#layer_info=$?
+bitbake-layers show-layers | grep "meta-uart" > /dev/null
+layer_info=$?
 
-#if [ $layer_info -ne 0 ];then
-	#echo "Adding meta-uartlayer"
-	#bitbake-layers add-layer ../meta-uart
-#else
-	#echo "meta-uartlayer already exists"
-#fi
+if [ $layer_info -ne 0 ];then
+	echo "Adding meta-uartlayer"
+	bitbake-layers add-layer ../meta-uart
+else
+	echo "meta-uartlayer already exists"
+fi
 
 bitbake-layers show-layers | grep "meta-fps" > /dev/null
 layer_info=$?

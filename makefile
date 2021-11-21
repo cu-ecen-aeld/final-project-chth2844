@@ -14,9 +14,12 @@ ifeq ($(LDFLAGS),)
 	LDFLAGS = -pthread -lrt
 endif
 
-all: fps server
+all: fps server uart 
 
 default : all 
+
+uart: uart.c 
+	$(CC) $(CFLAGS) -o uart uart.c $(LDFLAGS)
 
 fps: fps.c 
 	$(CC) $(CFLAGS) -o fps fps.c $(LDFLAGS)
@@ -28,5 +31,6 @@ server: server.c
 
 clean:
 	\rm fps
+	\rm uart
 	\rm server
 	$(RM) $(TARGET)
