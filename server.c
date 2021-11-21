@@ -29,9 +29,10 @@ void func(int sockfd)
 		// read the message from client and copy it in buffer 
 		read(sockfd, buff, sizeof(buff)); 
 		// print buffer which contains the client contents 
-		printf("From client0: %d", buff[0]); 
-		printf("From client1: %d", buff[1]); 
-		printf("From client2: %d", buff[2]); 
+		printf("First Character From Client: %c\n", buff[0]); 
+		printf("Second Character From Client: %c\n", buff[1]); 
+		printf("Third Character From Client: %c\n", buff[2]); 
+                printf("Fourth Character From Client: %c\n", buff[3]);
 		bzero(buff, MAX); 
 		n = 0; 
 		// copy server message in the buffer 
