@@ -219,7 +219,10 @@ int identify_fingerprint()
 
 	if(cResponse[7] == 0x30)
 	{
-		printf("The Fingerprint ID is:%d \n", cResponse[3]);
+		if(cResponse[3] == 1)
+                {
+                   printf("Fingerprint ID: Chirayu\n");
+                } 
 		buff[0] = (char) cResponse[3];
 		while(led_off_fingerprint() == -1);
 		return 1;
