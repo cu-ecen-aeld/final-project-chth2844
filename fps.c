@@ -67,7 +67,7 @@ unsigned char ENROLL2[MAX_FRAME_SIZE] 		= {0x55, 0xAA, 0x01, 0x00, 0x00, 0x00, 0
 unsigned char ENROLL3[MAX_FRAME_SIZE] 		= {0x55, 0xAA, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x25, 0x00, 0x25, 0x01};
 
   unsigned char cResponse[MAX_FRAME_SIZE];
-  char sDevice[] = "/dev/ttyS0";
+  char sDevice[] = "/dev/serial0";
   unsigned char bytes_read=0;
   unsigned char bytes_write=0;
   int hDevice=0;
