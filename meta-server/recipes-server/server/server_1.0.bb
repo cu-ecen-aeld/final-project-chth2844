@@ -6,12 +6,13 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "git://git@github.com/cu-ecen-aeld/final-project-chth2844.git;protocol=ssh;branch=main"
+SRC_URI = "git://git@github.com/cu-ecen-aeld/final-project-shni9045.git;protocol=ssh;branch=master"
 PV = "1.0+git${SRCPV}"
-SRCREV = "8a29311dce085589afff6e2bf5383d462e4e7b86"
+SRCREV = "953afe4b954c7bd1f4917efa78bb8f331737e92e"
 
 
 S = "${WORKDIR}/git"
+B = "${S}/Socket_Server"
 
 #inherit autotools
 

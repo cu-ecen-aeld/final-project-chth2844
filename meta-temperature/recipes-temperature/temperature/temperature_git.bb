@@ -9,7 +9,7 @@ SRC_URI = "git://git@github.com/cu-ecen-aeld/final-project-shni9045.git;protocol
 
 PV = "1.0+git${SRCPV}"
 # TODO: set to reference a specific commit hash in your assignment repo
-SRCREV = "639a597b1f14e8345b4c244f07a6cf904cc57334"
+SRCREV = "953afe4b954c7bd1f4917efa78bb8f331737e92e"
 
 # This sets your staging directory based on WORKDIR, where WORKDIR is defined at 
 # https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-WORKDIR
@@ -23,6 +23,7 @@ B = "${S}/Temperature_Sensor"
 FILES_${PN} += "${bindir}/tempsensor"
 
 # TODO: customize these as necessary for any libraries you need for your application
+TARGET_LDFLAGS += "-pthread -lrt"
 
 do_configure () {
 	:
