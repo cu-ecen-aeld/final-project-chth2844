@@ -32,7 +32,7 @@ do_compile () {
 
 do_install () {
 	install -d ${D}${bindir}
-	install -m 0755 ${S}/server ${D}${bindir}/	
+	install -m 0755 ${B}/server ${D}${bindir}/	
 
 
 }
