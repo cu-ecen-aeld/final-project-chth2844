@@ -9,18 +9,25 @@ SRC_URI = "git://git@github.com/cu-ecen-aeld/final-project-shni9045.git;protocol
 
 PV = "1.0+git${SRCPV}"
 # TODO: set to reference a specific commit hash in your assignment repo
-SRCREV = "953afe4b954c7bd1f4917efa78bb8f331737e92e"
+SRCREV = "a1c0217f8567b97eaaf7d3a536fcb4249227a194"
 
 # This sets your staging directory based on WORKDIR, where WORKDIR is defined at 
 # https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-WORKDIR
 # We reference the "server" directory here to build from the "server" directory
 # in your assignments repo
-S = "${WORKDIR}/git"
-B = "${S}/Temperature_Sensor"
+S = "${WORKDIR}/git/Temperature_Sensor"
+#B = "${S}/Temperature_Sensor"
 
 # TODO: Add the aesdsocket application and any other files you need to install
 # See http://git.yoctoproject.org/cgit.cgi/poky/plain/meta/conf/bitbake.conf?h=warrior for yocto path prefixes
 FILES_${PN} += "${bindir}/tempsensor"
+
+
+#INITSCRIPT_PACKAGES = "${PN}"
+#INITSCRIPT_NAME = "sensor"
+#RDEPENDS_${PN} = "initscripts"
+
+#inherit update-rc.d
 
 # TODO: customize these as necessary for any libraries you need for your application
 TARGET_LDFLAGS += "-pthread -lrt"
@@ -42,5 +49,12 @@ do_install () {
 	# https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-S
 	# See example at https://github.com/cu-ecen-aeld/ecen5013-yocto/blob/ecen5013-hello-world/meta-ecen5013/recipes-ecen5013/ecen5013-hello-world/ecen5013-hello-world_git.bb
 	install -d ${D}${bindir}
-	install -m 0755 ${B}/tempsensor ${D}${bindir}/
+	install -m 0755 ${S}/tempsensor ${D}${bindir}/
+
+        #install -d ${D}${sysconfdir}/init.d
+        #install -m 0755 ${S}/sensor ${D}${sysconfdir}/init.d
 }
+
+
+
+

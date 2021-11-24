@@ -33,9 +33,14 @@ cat conf/local.conf | grep "${ADD_PACK}" > /dev/null
 local_pack_info=$?
 
 # Add Wifi support
-DISTRO_F="DISTRO_FEATURES:append = \"wifi\""
+DISTRO_F="DISTRO_FEATURES:append = \"wifi systemd\""
 cat conf/local.conf | grep "${DISTRO_F}" > /dev/null
 local_distro_info=$?
+
+# add Virtual runtime MD
+VIRT_F="VIRTUAL-RUNTIME_init_manager = \"systemd\""
+cat conf/local.conf | grep "${VIRT_F}" > /dev/null
+local_virtual_info=$?
 
 # Add firmware aupport
 IMAGE_ADD="IMAGE_INSTALL:append = \"linux-firmware-rpidistro-bcm43430 v4l-utils python3 ntp wpa-supplicant libgpiod libgpiod-tools libgpiod-dev\""
@@ -80,6 +85,15 @@ if [ $local_distro_info -ne 0 ];then
 else
         echo "${DISTRO_F} already exists in the local.conf file"
 fi
+
+if [ $local_virtual_info -ne 0 ];then
+        echo "Append ${VIRT_F} in the local.conf file"
+        echo ${VIRT_F} >> conf/local.conf
+        
+else
+        echo "${VIRT_F} already exists in the local.conf file"
+fi
+
 
 if [ $local_imgadd_info -ne 0 ];then
         echo "Append ${IMAGE_ADD} in the local.conf file"

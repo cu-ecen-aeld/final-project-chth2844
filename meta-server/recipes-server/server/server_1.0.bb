@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRC_URI = "git://git@github.com/cu-ecen-aeld/final-project-shni9045.git;protocol=ssh;branch=master"
 PV = "1.0+git${SRCPV}"
-SRCREV = "953afe4b954c7bd1f4917efa78bb8f331737e92e"
+SRCREV = "a1c0217f8567b97eaaf7d3a536fcb4249227a194"
 
 
 S = "${WORKDIR}/git"
