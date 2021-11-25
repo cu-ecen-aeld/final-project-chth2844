@@ -240,7 +240,7 @@ int is_Finger_pressed()
 {
 	for (int i=0; i<MAX_FRAME_SIZE; i++) 
     		cResponse[i] = 0;
-	bytes_write=write(hDevice,ISPRESSFINGER2,sizeof(ISPRESSFINGER2));
+	bytes_write=write(hDevice,ISPRESSFINGER,sizeof(ISPRESSFINGER));
 	bytes_read=read(hDevice, cResponse, MAX_FRAME_SIZE);
 	if(cResponse[8] == 0x30 && cResponse[7] == 0x00 && cResponse[6] == 0x00 && cResponse[5] == 0x00 && cResponse[4] == 0x00)
 	{	
